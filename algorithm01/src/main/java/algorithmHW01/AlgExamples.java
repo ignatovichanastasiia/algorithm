@@ -42,12 +42,13 @@ public class AlgExamples {
 
         //Перебор - поиск персоны с именем t.
         String t = "1";
+        long l = System.nanoTime();
         for(int j = 0; j< list.size(); j++){
             if(list.get(j).getName().equals(t)){
                 list.get(j).toString();
             }
         }
-
+        System.out.println("Время работы перебора: " System.nanoTime()- l);
 
     }
 }
