@@ -48,7 +48,7 @@ public class AlgExamples {
                 list.get(j).toString();
             }
         }
-        System.out.println("Время работы перебора: " System.nanoTime()- l);
+        System.out.println("Время работы перебора: " + (System.nanoTime()- l));
 
     }
 }
