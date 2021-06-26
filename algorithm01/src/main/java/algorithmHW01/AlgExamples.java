@@ -30,22 +30,22 @@ public class AlgExamples {
 
     public static void main(String[] args) {
         //создание, вывод данных
-        Person p = new Person();
-        p.toString();
+        Person p = new Person(10);
+        System.out.println("Персона "+p.toString());
 
         //создание листа персон
         List<Person> list = new ArrayList<>();
         for(int i = 0; i<7;i++){
-            list.add(new Person());
+            list.add(new Person(i));
         }
-        list.toString();
+        System.out.println("Лист персон" + list.toString());
 
         //Перебор - поиск персоны с именем t.
-        String t = "1";
+        String t = "5";
         long l = System.nanoTime();
         for(int j = 0; j< list.size(); j++){
             if(list.get(j).getName().equals(t)){
-                list.get(j).toString();
+                System.out.println("Результат поиска: "+list.get(j).toString());
             }
         }
         System.out.println("Время работы перебора: " + (System.nanoTime()- l));
@@ -57,8 +57,9 @@ class Person {
     private String name;
     private Integer i;
 
-    public Person() {
-        this.name = String.valueOf(i + 1);
+    public Person(int j) {
+        this.i = j;
+        this.name = String.valueOf(j);
     }
 
     @Override
