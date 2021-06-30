@@ -1,7 +1,134 @@
 package algorithmHW02;
-//Через 2 часа здесь будет дз.
+
+import java.util.Arrays;
+import java.util.Random;
 
 public class AlgEx {
+    public static void main(String[] args) {
+        Random rn = new Random();
+
+        //создание массива персон
+        Person02[] perArr = new Person02[7];
+        for (int i = 0; i < 7; i++) {
+            int d = rn.nextInt(20);
+            perArr[i] = new Person02(d);
+        }
+        System.out.println("Массив персон: " + Arrays.toString(perArr));
+        System.out.println("Массив, как лист: " + Arrays.asList(perArr));
+//        Arrays.sort(perArr); - сортировка не сработает без компарабл;
+//        Arrays.compare(perArr[0],perArr[1]);- аналогично;
+        long l = System.nanoTime();
+        Person02[] perArrCopy = Arrays.copyOf(perArr, perArr.length);
+        System.out.println("Время работы копирования: " + (System.nanoTime() - l));
+        long k = System.nanoTime();
+        System.out.println("Copy Массив персон: " + Arrays.toString(perArrCopy));
+        System.out.println("Время работы принта toString: " + (System.nanoTime() - k));
+        //создание второго массива персон
+        Person02[] perArr2 = new Person02[7];
+        for (int i = 0; i < 7; i++) {
+            perArr2[i] = new Person02(i);
+        }
+        System.out.println("Второй массив персон: " + Arrays.toString(perArr2));
+        Person02 key = new Person02(2);
+        System.out.println("Персона-ключ: "+key.toString());
+        long t = System.nanoTime();
+        System.out.println("Линейный поиск по персоне ключу: " + Person02.lineSearch(perArr2, key));
+        System.out.println("Время работы линейного поиска: " + (System.nanoTime() - t));
+        long r = System.nanoTime();
+        System.out.println("Двоичный поиск по персоне ключу: " + Person02.BiSearch(perArr2, key));
+        System.out.println("Время работы двоичного поиска: " + (System.nanoTime() - r));
+        int[] intArr = new int[400];
+        for(int i = 0; i< intArr.length;i++){
+            intArr[i] = rn.nextInt(100);
+        }
+        int[] intArrCopy = Arrays.copyOf(intArr,intArr.length);
+        System.out.println("Массив 400эл не сорт"+Arrays.toString(intArr));
+        long p = System.nanoTime();
+        Arrays.sort(intArr);
+        System.out.println("Время работы sort 400эл: " + (System.nanoTime() - p));
+        System.out.println("Массив 400эл - сорт"+Arrays.toString(intArr));
+        int[] intArrCopy2 = Arrays.copyOf(intArrCopy,intArr.length);
+        long u = System.nanoTime();
+        Person02.sortBubble(intArrCopy);
+        System.out.println("Время работы сортировки Bubble 400эл: " + (System.nanoTime() - p));
+        System.out.println("Массив 400эл - сорт"+Arrays.toString(intArrCopy));
+    }
+}
+
+//собственный класс
+class Person02 {
+    private int number;
+
+    public Person02(int j) {
+        this.number = j;
+    }
+
+    @Override
+    public String toString() {
+        return "Person02{" +
+                "number=" + number +
+                '}';
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public static int lineSearch(Person02[] arr, Person02 key) {
+        for (int i = 0; i < arr.length; i++) {
+            arr[i].getNumber();
+            if (arr[i].getNumber() == key.getNumber()) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public static int BiSearch(Person02[] arr, Person02 key){
+        int first = 0;
+        int last = arr.length-1;
+        boolean fin = false;
+        int search = -1;
+
+        while(first!=last){
+            int middle = (first+last)/2;
+            if(arr[middle].getNumber()==key.getNumber()){
+                search = middle;
+                first=last;
+            }
+            if(arr[middle].getNumber()<key.getNumber()){
+                first = middle+1;
+            }
+            if(arr[middle].getNumber()> key.getNumber()){
+                last = middle-1;
+            }
+        }
+        if(arr[first].getNumber()== key.getNumber()){
+            search = first;
+        }
+        return search;
+    }
+
+    public static int[] sortBubble(int[] arr){
+        int buff = 0;
+        boolean sort = false;
+        do {
+            sort = true;
+            for (int i = 0; i < arr.length-1; i++) {
+                if (arr[i] > arr[i + 1]) {
+                    buff = arr[i];
+                    arr[i] = arr[i + 1];
+                    arr[i + 1] = buff;
+                }
+            }
+            for(int j=0; j<arr.length-1;j++){
+                if(arr[j]>arr[j+1]){
+                    sort=false;
+                }
+            }
+        } while(!sort);
+        return arr;
+    }
 }
 
 //    Домашние задание №2
