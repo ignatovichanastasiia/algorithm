@@ -50,8 +50,13 @@ public class AlgEx {
         int[] intArrCopy2 = Arrays.copyOf(intArrCopy,intArr.length);
         long u = System.nanoTime();
         Person02.sortBubble(intArrCopy);
-        System.out.println("Время работы сортировки Bubble 400эл: " + (System.nanoTime() - p));
+        System.out.println("Время работы сортировки Bubble 400эл: " + (System.nanoTime() - u));
         System.out.println("Массив 400эл - сорт"+Arrays.toString(intArrCopy));
+        int[] intArrCopy3 = Arrays.copyOf(intArrCopy2,intArr.length);
+        long w = System.nanoTime();
+        Person02.sortGet(intArrCopy2);
+        System.out.println("Время работы сортировки Get 400эл: " + (System.nanoTime() - w));
+        System.out.println("Массив 400эл - сорт"+Arrays.toString(intArrCopy2));
     }
 }
 
@@ -87,7 +92,6 @@ class Person02 {
     public static int BiSearch(Person02[] arr, Person02 key){
         int first = 0;
         int last = arr.length-1;
-        boolean fin = false;
         int search = -1;
 
         while(first!=last){
@@ -127,6 +131,35 @@ class Person02 {
                 }
             }
         } while(!sort);
+        return arr;
+    }
+
+    public static int[] sortGet(int[] arr){
+        int buff = 0;
+        boolean sort = false;
+        while (!sort) {
+            int max = arr[0];
+            int key = 0;
+            for(int j=arr.length-1;j>=0;j--) {
+                buff = arr[j];
+                for (int i = 1; i <= j; i++) {
+                    if (max < arr[i]) {
+                        max = arr[i];
+                        key = i;
+                    }
+                }
+                arr[j] = max;
+                arr[key]= buff;
+                max = arr[0];
+                key = 0;
+            }
+            sort = true;
+            for(int j=0; j<arr.length-1;j++){
+                if(arr[j]>arr[j+1]){
+                    sort=false;
+                }
+            }
+        }
         return arr;
     }
 }
