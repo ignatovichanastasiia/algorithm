@@ -59,7 +59,8 @@ public class AlgEx {
         System.out.println("Массив 400эл - сорт" + Arrays.toString(intArrCopy2));
         long z = System.nanoTime();
         Person02.sortIns(intArrCopy3);
-        System.out.println("Время работы сортировки Get 400эл: " + (System.nanoTime() - z));
+        Person02.sortIns(intArrCopy3);
+        System.out.println("Время работы сортировки Ins 400эл: " + (System.nanoTime() - z));
         System.out.println("Массив 400эл - сорт" + Arrays.toString(intArrCopy3));
 
     }
@@ -169,18 +170,18 @@ class Person02 {
     }
 
     public static int[] sortIns(int[] arr) {
-        int out = 0;
         boolean sort = false;
         while (!sort) {
             for (int j = arr.length - 1; j >= 0; j--) {
                 int max = arr[0];
+                int out = 0;
                 for (int i = 1; i <= j; i++) {
                     if (max < arr[i]) {
                         max = arr[i];
                         out = i;
                     }
                 }
-                for(int h=out;h<j-1;h++){
+                for(int h=out;h<=j-1;h++){
                     arr[h]=arr[h+1];
                 }
                 arr[j]=max;
