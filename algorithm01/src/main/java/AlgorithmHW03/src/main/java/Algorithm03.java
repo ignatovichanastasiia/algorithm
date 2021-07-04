@@ -46,6 +46,60 @@ public class Algorithm03 {
         System.out.println(list2.toString());
         System.out.println("Время toString: " + (System.nanoTime() - d));
 
+        OWList<Model> li = new OWList<>();
+        li.insert(new Model(15));
+        li.insert(new Model(2));
+        Random rn = new Random();
+        for(int b=0; b<10;b++) {
+            li.insert(new Model(rn.nextInt(25)));
+        }
+        System.out.println("Собран односторонний лист моделей.");
+        li.display();
+        System.out.println("Ищем модель 2");
+        System.out.println(li.find(new Model(2)));
+        System.out.println("");
+        while(!li.isEmpty()){
+            li.delete();
+            System.out.println("Элемент стерт.");
+            li.display();
+        }
+        System.out.println("Лист стерт.");
+        li.display();
+
+        TWList<Model> li2 = new TWList<>();
+        li2.insertFirst(new Model(15));
+        li2.insertLast(new Model(2));
+        for(int b=0; b<10;b++) {
+            li2.insertLast(new Model(rn.nextInt(25)));
+        }
+        System.out.println("Собран двухсторонний лист моделей.");
+        li2.display();
+        System.out.println("Ищем модель 2");
+        System.out.println(li2.find(new Model(2)));
+        System.out.println("");
+        for(int h=0;h<3;h++){
+            if(!li2.isEmpty()){
+                li2.deleteLast();
+                System.out.println("Элемент стерт c конца.");
+                li2.display();
+            }
+        }
+        while(!li2.isEmpty()){
+            li2.delete();
+            System.out.println("Элемент стерт с начала.");
+            li2.display();
+        }
+        System.out.println("Двухсторонний лист стерт.");
+        li2.display();
+        System.out.println("");
+        TWList<Model> li3 = new TWList<>();
+        for(int b=0; b<10;b++) {
+            li3.insertLast(new Model(rn.nextInt(25)));
+        }
+        System.out.println("Собран двухсторонний лист для итератора.");
+        li3.display();
+
+
     }
 
     public static Integer[] getArr() {
@@ -56,26 +110,9 @@ public class Algorithm03 {
         }
         return arr;
     }
+}
 
-    public class Model {
-        private int num;
 
-        public Model(int i) {
-            this.num = i;
-        }
-
-        public int getNum() {
-            return num;
-        }
-    }
-//    public class OneWayList<E>{
-//        private E link;
-//        private OneWayList<E> next;
-//
-//        OneWayList(){
-//
-//        }
-//    }
 
 //    Задание 3.1
 //    На основе массива из домашнего задания 2.1 реализуйте простой
@@ -98,4 +135,4 @@ public class Algorithm03 {
 //    выполните базовые операции итератора.
 //    Оцените время выполнения операций с помощью базового метода
 //System.nanoTime()
-}
+
