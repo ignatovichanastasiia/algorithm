@@ -1,4 +1,7 @@
-public class TWLink<E>{
+import java.util.Iterator;
+
+
+public class TWLink<E> {
     private E link;
     private TWLink<E> next;
     private TWLink<E> previous;
@@ -12,9 +15,9 @@ public class TWLink<E>{
     }
 
     public void setNext(TWLink<E> l) {
-        if(l==null){
-            this.previous=null;
-        }else {
+        if (l == null) {
+            this.previous = null;
+        } else {
             this.next = l;
         }
     }
@@ -24,9 +27,9 @@ public class TWLink<E>{
     }
 
     public void setPrevious(TWLink<E> previous) {
-        if(previous==null){
-            this.previous=null;
-        }else {
+        if (previous == null) {
+            this.previous = null;
+        } else {
             this.previous = previous;
         }
     }
@@ -36,11 +39,11 @@ public class TWLink<E>{
     }
 }
 
-class TWList<E> //implements ListIterator
-         {
+class TWList<E> implements Iterable<E> {
     private TWLink<E> first;
     private TWLink<E> last;
-    private TWLink<E> iterator;
+    private int currentSize;
+    private int index;
 
     public TWLink<E> getFirst() {
         return first;
@@ -88,10 +91,10 @@ class TWList<E> //implements ListIterator
     }
 
     public TWLink<E> delete() {
-        if(first==last){
+        if (first == last) {
             first = null;
             last = null;
-        }else {
+        } else {
             TWLink<E> t = first;
             first = first.getNext();
             return t;
@@ -106,16 +109,16 @@ class TWList<E> //implements ListIterator
     }
 
     public void display() {
-        if (first == null||last == null) {
+        if (first == null || last == null) {
             System.out.println("{}");
         }
         TWLink<E> n = first;
-        while (n!=null) {
-            if(!n.equals(last)){
-                System.out.print(n.getValue()+", ");
+        while (n != null) {
+            if (!n.equals(last)) {
+                System.out.print(n.getValue() + ", ");
                 n = n.getNext();
-            }else{
-                System.out.println(last.getValue()+"\n");
+            } else {
+                System.out.println(last.getValue() + "\n");
                 break;
             }
         }
@@ -133,4 +136,78 @@ class TWList<E> //implements ListIterator
         }
         return null;
     }
+
+
+    public int getCurrentSize() {
+        currentSize = -1;
+        if (first != null) {
+            TWLink<E> n = first;
+            index = 0;
+            while (n != null) {
+                n = n.getNext();
+                index++;
+            }
+            currentSize = index + 1;
+        }
+        return currentSize;
+    }
+
+    public int getIndex(TWLink<E> elem) {
+        index = -1;
+        if (first != null) {
+            TWLink<E> n = first;
+            index = 0;
+            while (!n.equals(elem)) {
+                if (n.equals(last) && !last.equals(elem)) {
+                    index = -1;
+                    break;
+                }
+                n = n.getNext();
+                index++;
+            }
+        }
+        return index;
+    }
+
+    public TWLink<E> getElement(int index) {
+        TWLink<E> n;
+        if (index == 0) {
+            n = first;
+        } else {
+            n = first;
+            for (int i = 1; i <= index; i++) {
+                n = n.getNext();
+            }
+        }
+        return n;
+    }
+
+    public Iterator<E> iterator() {
+        Iterator<E> it = new Iterator<E>() {
+            private int currentSize = getCurrentSize();
+            private int currentIndex = 0;
+
+            @Override
+            public boolean hasNext() {
+                return currentIndex < getCurrentSize() && getElement(currentIndex) != null;
+            }
+
+            @Override
+            public E next() {
+                return getElement(currentIndex++).getValue();
+            }
+
+            @Override
+            public void remove() {
+                TWLink<E> n = getElement(currentIndex);
+                TWLink<E> pr = n.getPrevious();
+                TWLink<E> nx = n.getNext();
+                pr.setNext(nx);
+                nx.setPrevious(pr);
+
+            }
+        };
+        return it;
+    }
 }
+
