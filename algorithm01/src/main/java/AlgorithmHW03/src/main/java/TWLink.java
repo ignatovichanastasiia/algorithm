@@ -1,5 +1,3 @@
-import java.util.ListIterator;
-
 public class TWLink<E>{
     private E link;
     private TWLink<E> next;
@@ -42,6 +40,7 @@ class TWList<E> //implements ListIterator
          {
     private TWLink<E> first;
     private TWLink<E> last;
+    private TWLink<E> iterator;
 
     public TWLink<E> getFirst() {
         return first;
@@ -134,51 +133,4 @@ class TWList<E> //implements ListIterator
         }
         return null;
     }
-
-//    @Override
-//    public boolean hasNext() {
-//        if(TWLink.next!=null) return true;
-//        return false;
-//    }
-//
-//    @Override
-//    public Object next() {
-//        return next;
-//    }
-//
-//    @Override
-//    public boolean hasPrevious() {
-//        if(previous!=null) return true;
-//        return false;
-//    }
-//
-//    @Override
-//    public Object previous() {
-//        return previous;
-//    }
-//
-//    @Override
-//    public int nextIndex() {
-//        return 0;
-//    }
-//
-//    @Override
-//    public int previousIndex() {
-//        return 0;
-//    }
-//
-//    @Override
-//    public void remove() {
-//
-//    }
-//
-//    @Override
-//    public void set(Object o) {
-//
-//    }
-//
-//    @Override
-//    public void add(Object o) {
-//
-//    }
 }
