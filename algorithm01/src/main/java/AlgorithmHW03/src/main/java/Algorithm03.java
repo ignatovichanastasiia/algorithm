@@ -92,14 +92,36 @@ public class Algorithm03 {
         System.out.println("Двухсторонний лист стерт.");
         li2.display();
         System.out.println("");
-        TWList<Model> li3 = new TWList<>();
+        LinkedList<Model> li3 = new LinkedList();
         for(int b=0; b<10;b++) {
-            li3.insertLast(new Model(rn.nextInt(25)));
+            li3.add(new Model(rn.nextInt(25)));
         }
-        System.out.println("Собран двухсторонний лист для итератора.");
-        li3.display();
+//        System.out.println("Собран двухсторонний лист для стандартного итератора.");
+//        Iterator iter = li3.iterator();
+//        System.out.println("Работа итератора: перебор hasNext,next & remove: ");
+//        while(iter.hasNext()){
+//            System.out.println(iter.next());
+//            iter.remove();
+//        }
+//        System.out.println("Лист стерт.");
+//        li3.stream().forEach(System.out::println);
 
-
+        TWList<Model> li4 = new TWList<>();
+        for(int b=0; b<10;b++) {
+            li4.insertFirst(new Model(rn.nextInt(25)));
+        }
+        System.out.println("Собран двухсторонний лист для своего итератора.");
+        li4.display();
+        Iterator it = li4.iterator();
+        long c = System.nanoTime();
+        for (int v = 0;v<4;v++){
+            if (it.hasNext()) it.next();
+        }
+        it.remove();
+        long v = System.nanoTime();
+        System.out.println("Удалили 4 элемент (hasNext,next,remove): ");
+        li4.display();
+        System.out.println("Время работы: "+(v-c));
     }
 
     public static Integer[] getArr() {
