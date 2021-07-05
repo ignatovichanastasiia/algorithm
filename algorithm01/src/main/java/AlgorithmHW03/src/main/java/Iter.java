@@ -1,3 +1,5 @@
+//Попытка создать свой итератор.
+
 //public class Iter<E> {
 //    private TWLink<E> it;
 //    private TWLink<E> itB;
@@ -29,7 +31,7 @@
 //        }
 //        return index;
 //    }
-
+//
 //    @Override
 //    public boolean hasNext() {
 //        if(it.next!=null) return true;
@@ -38,28 +40,30 @@
 //
 //    @Override
 //    public Object next() {
-//        return it.next;
+//        return it.getNext();
 //    }
 //
 //    @Override
 //    public boolean hasPrevious() {
-//        if(it.getPrevious!=null) return true;
+//        if(it.getPrevious()!=null) return true;
 //        return false;
 //    }
 //
 //    @Override
 //    public Object previous() {
-//        return it.previous;
+//        return it.getPrevious();
 //    }
 //
 //    @Override
 //    public int nextIndex() {
-//        if((int ind = it.getIndex+1)<size)return ind
+//        if((int ind = it.getIndex()+1)<size)return ind;
+//            return 0;
 //    }
 //
 //    @Override
 //    public int previousIndex() {
-//        return 0;
+//        if((int ind = it.getIndex()+1)<size)return ind;
+//      return 0;
 //    }
 //
 //    @Override
@@ -69,11 +73,11 @@
 //
 //    @Override
 //    public void set(Object o) {
-//
+//         if(Object o.
 //    }
 //
 //    @Override
 //    public void add(Object o) {
 //
 //    }
-
+//}
