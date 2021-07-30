@@ -287,7 +287,8 @@ public class Algorithm06 {
         System.out.println("insert time: " + (System.nanoTime() - w));
         tree.insert(new Model(8));
         tree.insert(new Model(2));
-        System.out.println("inserted models 5,8,2");
+        tree.insert(new Model(9));
+        System.out.println("inserted models 5,8,2,9");
         long e = System.nanoTime();
         System.out.println("find 2: " + Node.toString(tree.find(2)) + " time: " + (System.nanoTime() - e));
         long r = System.nanoTime();
@@ -296,6 +297,8 @@ public class Algorithm06 {
         System.out.println("min: " + Node.toString(tree.min()) + " time: " + (System.nanoTime() - t));
         long f = System.nanoTime();
         System.out.println("delete 2: " + tree.delete(2) + " time: " + (System.nanoTime() - f));
+        System.out.println("display: ");
+        tree.displayTree();
         Random rn = new Random();
         int[] arr1 = new int[10];
         int[] arr2 = new int[10];
