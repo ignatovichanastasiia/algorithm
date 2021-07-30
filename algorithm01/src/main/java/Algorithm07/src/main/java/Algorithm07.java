@@ -56,4 +56,5 @@ class Graph{
             adjMat[i][j]=0;
         }
     }
+    //в работе
 }
