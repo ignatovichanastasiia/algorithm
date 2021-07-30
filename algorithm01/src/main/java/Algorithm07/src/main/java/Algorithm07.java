@@ -16,22 +16,24 @@ public class Algorithm07 {
 //    Выполните оценку времени с помощью System.nanoTime().
     public static void main(String[] args) {
         Graph graph = new Graph();
+        System.out.println("Inserting tops from 'A' to 'H'");
         graph.addVertex('A');
         graph.addVertex('B');
         graph.addVertex('C');
         graph.addVertex('D');
         graph.addVertex('E');
         graph.addVertex('H');
+        System.out.println("Inserting ribs in matrix");
         graph.addEdge(0,1);
         graph.addEdge(1,2);
         graph.addEdge(0,3);
         graph.addEdge(3,4);
         graph.addEdge(0,5);
         long a = System.nanoTime();
-        graph.displayInsideGraph(0);
+        graph.displayOutsideGraph(0);
         System.out.println("End of first method. Working timer: "+(System.nanoTime()-a));
         long b = System.nanoTime();
-        graph.displayOutsideGraph();
+        graph.displayInsideGraph(0);
         System.out.println("End of second method. Working timer: "+(System.nanoTime()-b));
 
     }
@@ -70,6 +72,7 @@ class Graph{
         }
         return -1;
     }
+
     public void addVertex(char label){vertexList[size++] = new Vertex(label);}
     public void addEdge(int start,int end){
         adjMat[start][end] = 1;
@@ -88,17 +91,18 @@ class Graph{
             }
         }
     }
-    public void displayOutsideGraph(){
+    public void displayOutsideGraph(int f){
         Queue<Integer> queue = new LinkedList<>();
-        vertexList[0].wasVisited = true;
-        displayVertex(0);
-        queue.add(0);
+        vertexList[f].wasVisited = true;
+//        displayVertex(f);
+        queue.add(f);
         int v2;
+//        FALL...
         while(!queue.isEmpty()){
             int v1 = queue.remove();
             while((v2 = getAdjUnvisitedVertex(v1))!=-1){
                 vertexList[v2].wasVisited = true;
-                displayVertex(v2);
+                fullDisplayVertex(v1,v2);
                 queue.add(v2);
             }
         }
