@@ -94,10 +94,8 @@ class Graph{
     public void displayOutsideGraph(int f){
         Queue<Integer> queue = new LinkedList<>();
         vertexList[f].wasVisited = true;
-//        displayVertex(f);
         queue.add(f);
         int v2;
-//        FALL...
         while(!queue.isEmpty()){
             int v1 = queue.remove();
             while((v2 = getAdjUnvisitedVertex(v1))!=-1){
