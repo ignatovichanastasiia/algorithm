@@ -37,6 +37,14 @@ public class Algorithm07 {
         graph.displayInsideGraph(0);
         graph.backFlags();
         System.out.println("End of second method. Working timer: "+(System.nanoTime()-b));
+        long c = System.nanoTime();
+        graph.displayOutsideGraph(1);
+        graph.backFlags();
+        System.out.println("End of first method. Working timer: "+(System.nanoTime()-c));
+        long d = System.nanoTime();
+        graph.displayInsideGraph(1);
+        graph.backFlags();
+        System.out.println("End of second method. Working timer: "+(System.nanoTime()-d));
 
     }
 }
