@@ -31,9 +31,11 @@ public class Algorithm07 {
         graph.addEdge(0,5);
         long a = System.nanoTime();
         graph.displayOutsideGraph(0);
+        graph.backFlags();
         System.out.println("End of first method. Working timer: "+(System.nanoTime()-a));
         long b = System.nanoTime();
         graph.displayInsideGraph(0);
+        graph.backFlags();
         System.out.println("End of second method. Working timer: "+(System.nanoTime()-b));
 
     }
@@ -104,12 +106,14 @@ class Graph{
                 queue.add(v2);
             }
         }
-        for (int i = 0;i<size;i++){
-            vertexList[i].wasVisited = false;
-        }
     }
     public void fullDisplayVertex(int vertex1,int vertex2){
         System.out.println("Вершины "+vertexList[vertex1].label+" - "
                 +vertexList[vertex2].label);
+    }
+    public void backFlags(){
+        for (int i = 0;i<size;i++){
+            vertexList[i].wasVisited = false;
+        }
     }
 }
