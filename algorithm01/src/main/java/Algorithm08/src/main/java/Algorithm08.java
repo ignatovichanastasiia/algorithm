@@ -16,21 +16,44 @@ public class Algorithm08 {
 //    Перестройте программный код задания 8.4 из алгоритма линейного пробирования в алгоритм двойного хеширования.
 //    Сравните отличительные черты двух алгоритмов.
 //        При двойном хешировании заполняемость более плотная, меньшая вероятность коллизий.
+//      НО! При малом объеме данных этого не прослеживается. В использовании на малом массиве они буквально одинаковы.
 
     public static void main(String[] args) {
         Item dataItem;
         int key;
         int size = 10;
         HashTable table = new HashTable(size);
+        HashTable table2 = new HashTable(size);
         Random rn = new Random();
         dataItem = new Item(211);
         table.insert(dataItem);
-        for (int j = 0; j < 9; j++) {
+        table2.insertD(dataItem);
+        for (int j = 0; j < 4; j++) {
             key = rn.nextInt(999);
             dataItem = new Item(key);
             table.insert(dataItem);
+            table2.insertD(dataItem);
         }
+        System.out.println("display ht-1");
         table.display();
+        System.out.println("display ht-2 - double");
+        table.display();
+        System.out.println("find ht-1 (211)");
+        long a = System.nanoTime();
+        System.out.println(table.find(211)+"  time: "+(System.nanoTime()-a));
+        System.out.println("find ht-2 (211)");
+        long b = System.nanoTime();
+        System.out.println(table2.findD(211)+"  time: "+(System.nanoTime()-b));
+        long c = System.nanoTime();
+        table.delete(211);
+        System.out.println("deleted ht-1 (211) time: "+(System.nanoTime()-c));
+        long d = System.nanoTime();
+        table2.deleteD(211);
+        System.out.println("deleted ht-2 (211) time: "+(System.nanoTime()-d));
+        System.out.println("display ht-1");
+        table.display();
+        System.out.println("display ht-2");
+        table2.display();
 
     }
 }
